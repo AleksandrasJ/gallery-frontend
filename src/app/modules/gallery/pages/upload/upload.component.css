@@ -1,0 +1,35 @@
+.preview-card {
+  height: 500px;
+  width: 100%;
+  border-right: darkgray solid 1px;
+  margin-bottom: 5px;
+}
+
+.detail {
+  margin-top: 22px;
+  width: 100%;
+}
+
+.button-display {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  margin-top: 14px;
+}
+
+.button-display button {
+  margin-top: 10px;
+}
+
+.image-display {
+  object-fit: contain;
+  width: 100%;
+  height: 80%;
+}
+
+.colored-button {
+  background-color: #FF3CAC;
+  background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
+  width: 9rem;
+  color: white;
+}

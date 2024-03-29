@@ -1,0 +1,61 @@
+<div class="container mt-5">
+  <div class="row">
+    <mat-card class="col-lg-6 col-md-6 col-12 preview-card">
+      <mat-card-header class="pb-3">
+        <mat-card-title>Image Preview</mat-card-title>
+      </mat-card-header>
+      <div *ngIf="loading" class="spinner">
+        <mat-spinner></mat-spinner>
+      </div>
+      <img *ngIf="!loading" [src]="'data:image/jpg;base64,' + image.imageData" alt="Image" class="image-display"
+           mat-card-image/>
+    </mat-card>
+    <mat-card class="col-lg-6 col-md-6 col-12 preview-card">
+      <mat-card-header class="pb-3">
+        <mat-card-title>Image Details</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-form-field class="detail">
+          <mat-label>Name</mat-label>
+          <input (blur)="updateErrorMessage()"
+                 [formControl]="name"
+                 matInput
+                 required>
+          @if (name.invalid) {
+            <mat-error>{{ errorMessage }}</mat-error>
+          }
+        </mat-form-field>
+        <mat-divider></mat-divider>
+        <mat-form-field class="detail">
+          <mat-label>Description</mat-label>
+          <input [(ngModel)]="image.description" matInput>
+        </mat-form-field>
+        <mat-divider></mat-divider>
+
+        <mat-form-field class="detail">
+          <mat-label>Tags</mat-label>
+          <mat-chip-grid #chipGrid aria-label="Enter tags">
+            @for (tag of tagsStringArray; track tag) {
+              <mat-chip-row (removed)="remove(tag)">
+                {{ tag }}
+                <button matChipRemove>
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </mat-chip-row>
+            }
+            <input
+              (matChipInputTokenEnd)="add($event)"
+              [matChipInputFor]="chipGrid"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
+          </mat-chip-grid>
+        </mat-form-field>
+        <mat-divider></mat-divider>
+      </mat-card-content>
+      <mat-card-actions class="button-display">
+        <button (click)="updateImage()" class="btn colored-button">
+          Update Image
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
