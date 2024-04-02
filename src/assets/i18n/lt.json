@@ -1,3 +1,27 @@
 {
-
+  "navbar_link_1": "Naršyti",
+  "navbar_link_2": "ZK galerija",
+  "navbar_search_placeholder": "Paieška",
+  "navbar_search_button": "Ieškoti",
+  "navbar_upload": "Įkelti",
+  "dialog_title": "Ištrinti nuotrauką",
+  "dialog_content": "Ar tikrai norite ištrinti nuotrauką?",
+  "dialog_yes": "Taip",
+  "dialog_no": "Ne",
+  "card_title_preview": "Nuotraukos peržiūra",
+  "card_title_details": "Nuotraukos informacija",
+  "image_name": "Nuotraukos vardas",
+  "name_error": "Nuotraukos vardas yra būtinas!",
+  "image_description": "Nuotraukos aprašymas",
+  "image_upload_date": "Įkėlimo  data",
+  "image_tags": "Nuotraukos žymos",
+  "image_upload": "Įkelti nuotrauką",
+  "image_edit": "Redaguoti nuotrauką",
+  "image_delete": "Ištrinti nuotrauką",
+  "image_update": "Atnaujinti nuotrauką",
+  "filter_tag": "Žymos",
+  "filter_date": "Data",
+  "filter_wrong_start_date": "Neteisinga pradžios data",
+  "filter_wrong_end_date": "Neteisinga pabaigos data",
+  "filter_button": "Filtruoti"
 }

@@ -1,8 +1,8 @@
-<h2 mat-dialog-title>Delete image</h2>
+<h2 mat-dialog-title>{{ 'dialog_title' | translate }}</h2>
 <mat-dialog-content>
-  Would you like to delete image?
+  {{ 'dialog_content' | translate }}
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button (click)="deleteImage()" mat-button mat-dialog-close>Yes</button>
-  <button mat-button mat-dialog-close>No</button>
+  <button (click)="deleteImage()" mat-button mat-dialog-close>{{ 'dialog_yes' | translate }}</button>
+  <button mat-button mat-dialog-close>{{ 'dialog_no' | translate }}</button>
 </mat-dialog-actions>

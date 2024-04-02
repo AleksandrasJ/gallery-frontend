@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {Router} from "@angular/router";
 import {ErrorModel} from "../../models/ErrorModel";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-navbar',
@@ -8,23 +9,29 @@ import {ErrorModel} from "../../models/ErrorModel";
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
-  public keyword: string | undefined;
-  public error: ErrorModel = {message: "", code: null};
+  keyword: string | undefined;
+  error: ErrorModel = {message: "", code: null};
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private translate: TranslateService) {
+    translate.setDefaultLang('lt');
   }
 
-  public navigateToExplorePage() {
+  switchLanguage(event: any) {
+    const language = event.target.value
+    this.translate.use(language);
+  }
+
+  navigateToExplorePage() {
     this.router.navigate(['/gallery/explore']).then().catch(err => {
       this.error.message = (err.message);
     });
   }
 
-  public navigateToZkPage() {
+  navigateToZkPage() {
     window.location.href = 'http://localhost:8080/index.zul';
   }
 
-  public navigateToExplorePageWithSearch() {
+  navigateToExplorePageWithSearch() {
     if (!this.keyword) {
       return;
     }
@@ -36,7 +43,7 @@ export class NavbarComponent {
     });
   }
 
-  public navigateToUploadPage() {
+  navigateToUploadPage() {
     this.router.navigate(['/gallery/upload']).then().catch(err => {
       this.error.message = (err.message);
     });

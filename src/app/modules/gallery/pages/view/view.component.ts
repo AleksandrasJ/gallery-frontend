@@ -12,11 +12,11 @@ import {TagModel} from "../../../../core/models/TagModel";
   styleUrl: './view.component.css'
 })
 export class ViewComponent implements OnInit {
-  public id: number | undefined;
-  public image: ImageModel | undefined;
-  public tags: TagModel[] | undefined;
-  public tagsStringArray: string[] = [];
-  public loading: boolean = true;
+  id: number | undefined;
+  image: ImageModel | undefined;
+  tags: TagModel[] | undefined;
+  tagsStringArray: string[] = [];
+  loading: boolean = true;
 
   constructor(private activatedRoute: ActivatedRoute,
               private galleryService: GalleryService,
@@ -29,7 +29,7 @@ export class ViewComponent implements OnInit {
     this.getImage(this.id);
   }
 
-  public openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+  openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
     this.dialog.open(DeletionDialogComponent, {
       width: '250px',
       enterAnimationDuration,
@@ -38,13 +38,13 @@ export class ViewComponent implements OnInit {
     });
   }
 
-  public navigateToEditPage(id: number | undefined) {
+  navigateToEditPage(id: number | undefined) {
     this.router.navigate([`/gallery/edit/${id}`]).then().catch(err => {
       alert(err);
     });
   }
 
-  private getImage(id: number) {
+  getImage(id: number) {
     this.galleryService.getImage(id).subscribe(
       (result: ImageModel) => {
         this.image = result;
@@ -55,7 +55,7 @@ export class ViewComponent implements OnInit {
     );
   }
 
-  private parseTags() {
+  parseTags() {
     if (!this.tags) {
       return;
     }

@@ -2,7 +2,7 @@
   <div class="row">
     <mat-card class="col-lg-6 col-md-6 col-12 preview-card">
       <mat-card-header class="pb-3">
-        <mat-card-title>Image Preview</mat-card-title>
+        <mat-card-title>{{ 'card_title_preview' | translate }}</mat-card-title>
       </mat-card-header>
       <div *ngIf="loading" class="spinner">
         <mat-spinner></mat-spinner>
@@ -12,26 +12,26 @@
     </mat-card>
     <mat-card class="col-lg-6 col-md-6 col-12 preview-card">
       <mat-card-header class="pb-3">
-        <mat-card-title>Image Details</mat-card-title>
+        <mat-card-title>{{ 'card_title_details' | translate }}</mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <div class="detail">
-          <h2 class="field-label">Name</h2>
+          <h2 class="field-label">{{ 'image_name' | translate }}</h2>
           <p>{{ image?.name }}</p>
         </div>
         <mat-divider></mat-divider>
         <div class="detail">
-          <h2 class="field-label">Description</h2>
+          <h2 class="field-label">{{ 'image_description' | translate }}</h2>
           <p>{{ image?.description }}</p>
         </div>
         <mat-divider></mat-divider>
         <div class="detail">
-          <h2 class="field-label">Upload Date</h2>
+          <h2 class="field-label">{{ 'image_upload_date' | translate }}</h2>
           <p>{{ image?.uploadDate }}</p>
         </div>
         <mat-divider></mat-divider>
         <div class="detail">
-          <h2 class="field-label">Tags</h2>
+          <h2 class="field-label">{{ 'image_tags' | translate }}</h2>
           <mat-chip-set>
             @for (tag of tagsStringArray; track tag) {
               <mat-chip>{{ "#" + tag }}</mat-chip>
@@ -42,8 +42,10 @@
       </mat-card-content>
       <mat-card-actions class="button-display">
         <div>
-          <button (click)="navigateToEditPage(id)" class="mx-1 btn colored-button">Edit Image</button>
-          <button (click)="openDialog('0ms', '0ms')" class="mx-1 btn btn-danger">Delete Image</button>
+          <button (click)="navigateToEditPage(id)" class="mx-1 btn colored-button">{{ 'image_edit' | translate }}
+          </button>
+          <button (click)="openDialog('0ms', '0ms')" class="mx-1 btn btn-danger">{{ 'image_delete' | translate }}
+          </button>
         </div>
       </mat-card-actions>
     </mat-card>

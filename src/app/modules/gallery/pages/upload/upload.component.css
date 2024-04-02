@@ -33,3 +33,8 @@
   width: 9rem;
   color: white;
 }
+
+.scrollable-chip-grid {
+  overflow-y: auto; /* Enable vertical scrollbar */
+  max-height: 40px; /* Adjust the maximum height as per your requirement */
+}

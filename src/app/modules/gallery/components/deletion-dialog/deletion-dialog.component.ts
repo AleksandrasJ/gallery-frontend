@@ -15,7 +15,7 @@ export class DeletionDialogComponent {
               private router: Router) {
   }
 
-  public deleteImage(): void {
+  deleteImage(): void {
     this.galleryService.deleteImage(<number>this.data.id).subscribe((response: string) => {
       this.router.navigate(['/gallery/explore']).then().catch(err => {
         alert(err)

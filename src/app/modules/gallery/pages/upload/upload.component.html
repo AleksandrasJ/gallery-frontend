@@ -2,57 +2,56 @@
   <div class="row">
     <mat-card class="col-lg-6 col-md-6 col-12 preview-card">
       <mat-card-header class="pb-3">
-        <mat-card-title>Image Preview</mat-card-title>
+        <mat-card-title>{{ 'card_title_preview' | translate }}</mat-card-title>
       </mat-card-header>
       <img [src]="previewImage || 'http://placehold.it/1'" alt="Image" class="image-display" mat-card-image/>
     </mat-card>
     <mat-card class="col-lg-6 col-md-6 col-12 preview-card">
       <mat-card-header class="pb-3">
-        <mat-card-title>Image Details</mat-card-title>
+        <mat-card-title>{{ 'card_title_details' | translate }}</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <mat-form-field class="detail">
-          <mat-label>Name</mat-label>
-          <input (blur)="updateErrorMessage()"
-                 [formControl]="name"
-                 matInput
-                 required>
-          @if (name.invalid) {
-            <mat-error>{{ errorMessage }}</mat-error>
-          }
-        </mat-form-field>
-        <mat-divider></mat-divider>
-        <mat-form-field class="detail">
-          <mat-label>Description</mat-label>
-          <input [(ngModel)]="image.description" matInput>
-        </mat-form-field>
-        <mat-divider></mat-divider>
-
-        <mat-form-field class="detail">
-          <mat-label>Tags</mat-label>
-          <mat-chip-grid #chipGrid aria-label="Enter tags">
-            @for (tag of tags; track tag) {
-              <mat-chip-row
-                (removed)="remove(tag)">
-                {{ "#" + tag }}
-                <button matChipRemove>
-                  <mat-icon>cancel</mat-icon>
-                </button>
-              </mat-chip-row>
+        <form>
+          <mat-form-field class="detail">
+            <mat-label>{{ 'image_name' | translate }}</mat-label>
+            <input [formControl]="name"
+                   matInput
+                   required>
+            @if (name.invalid) {
+              <mat-error>{{ 'name_error' | translate }}</mat-error>
             }
-            <input
-              (matChipInputTokenEnd)="add($event)"
-              [matChipInputFor]="chipGrid"
-              [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
-          </mat-chip-grid>
-        </mat-form-field>
-
-        <mat-divider></mat-divider>
+          </mat-form-field>
+          <mat-divider></mat-divider>
+          <mat-form-field class="detail">
+            <mat-label>{{ 'image_description' | translate }}</mat-label>
+            <input [(ngModel)]="image.description" matInput>
+          </mat-form-field>
+          <mat-divider></mat-divider>
+          <mat-form-field class="detail">
+            <mat-label>{{ 'image_tags' | translate }}</mat-label>
+            <mat-chip-grid #chipGrid aria-label="Enter tags" class="scrollable-chip-grid">
+              @for (tag of tags; track tag) {
+                <mat-chip-row
+                  (removed)="remove(tag)">
+                  {{ "#" + tag }}
+                  <button matChipRemove>
+                    <mat-icon>cancel</mat-icon>
+                  </button>
+                </mat-chip-row>
+              }
+              <input
+                (matChipInputTokenEnd)="add($event)"
+                [matChipInputFor]="chipGrid"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
+            </mat-chip-grid>
+          </mat-form-field>
+          <mat-divider></mat-divider>
+        </form>
       </mat-card-content>
       <mat-card-actions class="button-display">
         <input (change)="onChange($event)" class="form-control" type="file">
         <button (click)="uploadFile()" [disabled]="uploadDisabled" class="btn colored-button">
-          Upload Image
+          {{ 'image_upload' | translate }}
         </button>
       </mat-card-actions>
     </mat-card>

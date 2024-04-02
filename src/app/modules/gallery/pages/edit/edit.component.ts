@@ -13,8 +13,8 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrl: './edit.component.css'
 })
 export class EditComponent implements OnInit {
-  public id: number | undefined;
-  public image: ImageModel = {
+  id: number | undefined;
+  image: ImageModel = {
     id: null,
     imageData: null,
     imageThumbnail: null,
@@ -23,13 +23,13 @@ export class EditComponent implements OnInit {
     uploadDate: null,
     tags: []
   };
-  public tags: TagModel[] | undefined;
-  public tagsStringArray: string[] = [];
-  public loading: boolean = true;
+  tags: TagModel[] | undefined;
+  tagsStringArray: string[] = [];
+  loading: boolean = true;
 
-  public errorMessage: string = "";
+  errorMessage: string = "";
 
-  public name = new FormControl('', Validators.required);
+  name = new FormControl('', Validators.required);
 
   readonly separatorKeysCodes = [ENTER, COMMA, SPACE] as const;
 
@@ -43,7 +43,7 @@ export class EditComponent implements OnInit {
     this.getImage(this.id);
   }
 
-  public add(event: MatChipInputEvent): void {
+  add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
 
     if (value) {
@@ -53,7 +53,7 @@ export class EditComponent implements OnInit {
     event.chipInput!.clear();
   }
 
-  public remove(tag: string) {
+  remove(tag: string) {
     const index = this.tagsStringArray.indexOf(tag);
 
     if (index >= 0) {
@@ -61,7 +61,7 @@ export class EditComponent implements OnInit {
     }
   }
 
-  public updateImage() {
+  updateImage() {
     if (this.name.hasError('required') || !this.id) {
       // TODO: Ismest pranesima
       alert("No NAME");
@@ -79,7 +79,7 @@ export class EditComponent implements OnInit {
     );
   }
 
-  public updateErrorMessage() {
+  updateErrorMessage() {
     if (this.name.hasError('required')) {
       this.errorMessage = 'You must enter a value';
     } else {
@@ -87,7 +87,7 @@ export class EditComponent implements OnInit {
     }
   }
 
-  private getImage(id: number) {
+  getImage(id: number) {
     this.galleryService.getImage(id).subscribe(
       (data: ImageModel) => {
         this.image = data;
@@ -99,14 +99,14 @@ export class EditComponent implements OnInit {
     );
   }
 
-  private parseTags() {
+  parseTags() {
     if (!this.tags) {
       return;
     }
     this.tagsStringArray = this.tags.map(tag => tag.tagName);
   }
 
-  private parseTagsToTagModel() {
+  parseTagsToTagModel() {
     if (!this.tags || !this.image) return;
 
     this.image.tags = this.tagsStringArray.map(tagName => ({tagName} as TagModel));
