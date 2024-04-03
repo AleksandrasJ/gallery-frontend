@@ -34,7 +34,8 @@ export class ViewComponent implements OnInit {
       width: '250px',
       enterAnimationDuration,
       exitAnimationDuration,
-      data: {id: this.id}
+      data: {id: this.id},
+      closeOnNavigation: true
     });
   }
 

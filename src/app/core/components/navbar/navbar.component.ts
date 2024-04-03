@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Router} from "@angular/router";
 import {ErrorModel} from "../../models/ErrorModel";
 import {TranslateService} from "@ngx-translate/core";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-navbar',
@@ -12,7 +13,7 @@ export class NavbarComponent {
   keyword: string | undefined;
   error: ErrorModel = {message: "", code: null};
 
-  constructor(private router: Router, private translate: TranslateService) {
+  constructor(private router: Router, private translate: TranslateService, private dialog: MatDialog) {
     translate.setDefaultLang('lt');
   }
 
@@ -25,6 +26,8 @@ export class NavbarComponent {
     this.router.navigate(['/gallery/explore']).then().catch(err => {
       this.error.message = (err.message);
     });
+
+    this.dialog.closeAll();
   }
 
   navigateToZkPage() {
@@ -41,11 +44,15 @@ export class NavbarComponent {
     }).then().catch(err => {
       this.error.message = err.message;
     });
+
+    this.dialog.closeAll();
   }
 
   navigateToUploadPage() {
     this.router.navigate(['/gallery/upload']).then().catch(err => {
       this.error.message = (err.message);
     });
+
+    this.dialog.closeAll();
   }
 }

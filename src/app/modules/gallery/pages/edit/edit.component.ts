@@ -73,8 +73,10 @@ export class EditComponent implements OnInit {
     this.image.name = this.name.value;
 
     this.galleryService.updateImage(this.id, this.image).subscribe(
-      response => {
-        console.log(response);
+      (response: string) => {
+        this.router.navigate([`/gallery/view/${this.id}`]).then().catch(err => {
+          alert(err)
+        });
       }
     );
   }
