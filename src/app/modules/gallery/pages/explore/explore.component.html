@@ -1,13 +1,13 @@
 <div class="container mt-3">
   <div class="row filtering-area">
     <div class="col-12 col-lg-4">
-      <mat-form-field subscriptSizing="dynamic">
+      <mat-form-field subscriptSizing="dynamic" class="w-100">
         <mat-label>{{ 'filter_tag' | translate }}</mat-label>
         <input [(ngModel)]="tagString" matInput type="text">
       </mat-form-field>
     </div>
-    <div class="col-12 col-lg-4">
-      <mat-form-field color="accent" subscriptSizing="dynamic">
+    <div class="col-12 col-lg-4 mt-2">
+      <mat-form-field color="accent" subscriptSizing="dynamic" class="w-100">
         <mat-label>{{ 'filter_date' | translate }}</mat-label>
         <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
           <input formControlName="start" matStartDate placeholder="Start date">
@@ -23,7 +23,7 @@
         }
       </mat-form-field>
     </div>
-    <div class="col-12 col-lg-4 text-lg-right text-center">
+    <div class="col-12 col-lg-4 mt-2 text-lg-right text-center">
       <button (click)="filterImages()" class="btn colored-button">{{ 'filter_button' | translate }}</button>
     </div>
   </div>

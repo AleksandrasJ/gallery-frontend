@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {Router} from "@angular/router";
-import {ErrorModel} from "../../models/ErrorModel";
 import {TranslateService} from "@ngx-translate/core";
 import {MatDialog} from "@angular/material/dialog";
 
@@ -11,7 +10,6 @@ import {MatDialog} from "@angular/material/dialog";
 })
 export class NavbarComponent {
   keyword: string | undefined;
-  error: ErrorModel = {message: "", code: null};
 
   constructor(private router: Router, private translate: TranslateService, private dialog: MatDialog) {
     translate.setDefaultLang('lt');
@@ -24,7 +22,6 @@ export class NavbarComponent {
 
   navigateToExplorePage() {
     this.router.navigate(['/gallery/explore']).then().catch(err => {
-      this.error.message = (err.message);
     });
 
     this.dialog.closeAll();
@@ -42,7 +39,6 @@ export class NavbarComponent {
       queryParams: {keyword: this.keyword},
       queryParamsHandling: "merge"
     }).then().catch(err => {
-      this.error.message = err.message;
     });
 
     this.dialog.closeAll();
@@ -50,7 +46,6 @@ export class NavbarComponent {
 
   navigateToUploadPage() {
     this.router.navigate(['/gallery/upload']).then().catch(err => {
-      this.error.message = (err.message);
     });
 
     this.dialog.closeAll();

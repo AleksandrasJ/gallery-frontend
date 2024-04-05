@@ -38,3 +38,8 @@
   background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
   color: white;
 }
+
+.scrollable-chip-grid {
+  overflow-y: auto; /* Enable vertical scrollbar */
+  max-height: 40px; /* Adjust the maximum height as per your requirement */
+}

@@ -13,10 +13,10 @@ import {TagModel} from "../../../../core/models/TagModel";
 })
 export class ViewComponent implements OnInit {
   id: number | undefined;
+  url: string = '';
   image: ImageModel | undefined;
   tags: TagModel[] | undefined;
   tagsStringArray: string[] = [];
-  loading: boolean = true;
 
   constructor(private activatedRoute: ActivatedRoute,
               private galleryService: GalleryService,
@@ -26,6 +26,7 @@ export class ViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = parseInt(<string>this.activatedRoute.snapshot.paramMap.get('id'));
+    this.url = `http://localhost:8080/api/gallery/image/photo/${this.id}`;
     this.getImage(this.id);
   }
 
@@ -46,10 +47,9 @@ export class ViewComponent implements OnInit {
   }
 
   getImage(id: number) {
-    this.galleryService.getImage(id).subscribe(
+    this.galleryService.getImageDetails(id).subscribe(
       (result: ImageModel) => {
         this.image = result;
-        this.loading = false;
         this.tags = result.tags;
         this.parseTags();
       }

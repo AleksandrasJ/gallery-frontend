@@ -63,8 +63,6 @@ export class EditComponent implements OnInit {
 
   updateImage() {
     if (this.name.hasError('required') || !this.id) {
-      // TODO: Ismest pranesima
-      alert("No NAME");
       return;
     }
 

@@ -29,13 +29,13 @@
           <mat-divider></mat-divider>
           <mat-form-field class="detail">
             <mat-label>{{ 'image_description' | translate }}</mat-label>
-            <input [(ngModel)]="image.description" matInput>
+            <input name="description" [(ngModel)]="image.description" matInput>
           </mat-form-field>
           <mat-divider></mat-divider>
 
           <mat-form-field class="detail">
             <mat-label>{{ 'image_tags' | translate }}</mat-label>
-            <mat-chip-grid #chipGrid aria-label="Enter tags">
+            <mat-chip-grid #chipGrid aria-label="Enter tags" class="scrollable-chip-grid">
               @for (tag of tagsStringArray; track tag) {
                 <mat-chip-row (removed)="remove(tag)">
                   {{ tag }}

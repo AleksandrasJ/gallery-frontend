@@ -67,6 +67,8 @@ export class ExploreComponent implements OnInit {
             this.nextDisabled = true;
           }
           this.loading = false;
+
+          this.scrollToTop();
         }
       );
     }
@@ -97,9 +99,19 @@ export class ExploreComponent implements OnInit {
             this.previousDisabled = true;
           }
           this.loading = false;
+
+          this.scrollToTop();
         }
       );
     }
+  }
+
+  scrollToTop() {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
   }
 
   redirectToView(id: number): void {

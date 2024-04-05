@@ -63,9 +63,6 @@ export class UploadComponent {
 
   uploadFile() {
     if (!this.selectedImage || this.name.hasError('required')) {
-      console.error('No file selected');
-      // TODO: Ismest pranesima
-      alert("No NAME No FILE");
       return;
     }
 

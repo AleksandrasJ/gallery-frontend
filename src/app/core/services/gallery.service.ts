@@ -33,6 +33,10 @@ export class GalleryService {
     return this.http.get<ImageModel>(`http://localhost:8080/api/gallery/image/${id}`);
   }
 
+  public getImageDetails(id: number): Observable<ImageModel> {
+    return this.http.get<ImageModel>(`http://localhost:8080/api/gallery/image/details/${id}`);
+  }
+
   public deleteImage(id: number): Observable<string> {
     return this.http.delete<string>(`http://localhost:8080/api/gallery/image/${id}`);
   }
