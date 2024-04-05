@@ -1,4 +1,4 @@
-<div class="container mt-3">
+<div class="container mt-2">
   <div class="row filtering-area">
     <div class="col-12 col-lg-4">
       <mat-form-field subscriptSizing="dynamic" class="w-100">
@@ -6,7 +6,7 @@
         <input [(ngModel)]="tagString" matInput type="text">
       </mat-form-field>
     </div>
-    <div class="col-12 col-lg-4 mt-2">
+    <div class="col-12 col-lg-4 mt-2-sm">
       <mat-form-field color="accent" subscriptSizing="dynamic" class="w-100">
         <mat-label>{{ 'filter_date' | translate }}</mat-label>
         <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
@@ -23,7 +23,7 @@
         }
       </mat-form-field>
     </div>
-    <div class="col-12 col-lg-4 mt-2 text-lg-right text-center">
+    <div class="col-12 col-lg-4 mt-2-sm text-lg-right text-center">
       <button (click)="filterImages()" class="btn colored-button">{{ 'filter_button' | translate }}</button>
     </div>
   </div>
@@ -37,17 +37,4 @@
   </div>
 </div>
 
-<div class="container-fluid fixed-bottom">
-  <div class="row navigation-arrows">
-    <div class="col text-left">
-      <button (click)="previousPage()" [disabled]="previousDisabled" color="accent" mat-flat-button>
-        <i class="fas fa-arrow-left"></i>
-      </button>
-    </div>
-    <div class="col text-right">
-      <button (click)="nextPage()" [disabled]="nextDisabled" color="accent" mat-flat-button>
-        <i class="fas fa-arrow-right"></i>
-      </button>
-    </div>
-  </div>
-</div>
+<mat-paginator class="paginator-container" [length]="totalElements" [pageIndex]="pageNumber" [pageSize]="8" (page)="changePage($event)"></mat-paginator>

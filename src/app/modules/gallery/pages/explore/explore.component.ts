@@ -6,6 +6,7 @@ import {ApiResponse} from "../../../../core/models/ApiResponse";
 import {FormControl, FormGroup} from "@angular/forms";
 import {FilterModel} from "../../../../core/models/FilterModel";
 import {Observable} from "rxjs";
+import {PageEvent} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-explore',
@@ -18,16 +19,14 @@ export class ExploreComponent implements OnInit {
   page: ApiResponse | undefined;
   filter: FilterModel | undefined;
   pageNumber: number = 0;
+  totalElements: number | undefined;
 
   tagString: string = "";
 
-  nextDisabled: boolean = false;
-  previousDisabled: boolean = true;
   range = new FormGroup({
     start: new FormControl<Date | null>(null),
     end: new FormControl<Date | null>(null)
   });
-  loading: boolean = false;
 
   constructor(private imageService: GalleryService,
               private activatedRoute: ActivatedRoute,
@@ -40,70 +39,6 @@ export class ExploreComponent implements OnInit {
       this.pageNumber = 0;
       this.getImages();
     })
-  }
-
-  nextPage(): void {
-    if (!this.page?.last && !this.loading) {
-      ++this.pageNumber;
-      this.loading = true;
-
-      let serviceCall: Observable<ApiResponse>;
-
-      if (this.filter) {
-        serviceCall = this.imageService.filterImages(this.pageNumber, this.filter);
-      } else if (!this.keyword) {
-        serviceCall = this.imageService.getAllImages(this.pageNumber);
-      } else {
-        serviceCall = this.imageService.searchImages(this.pageNumber, this.keyword);
-      }
-
-      serviceCall.subscribe(
-        (data: ApiResponse) => {
-          this.page = data;
-          this.images = data.content;
-          this.previousDisabled = false;
-          if (this.page.last) {
-            this.previousDisabled = false;
-            this.nextDisabled = true;
-          }
-          this.loading = false;
-
-          this.scrollToTop();
-        }
-      );
-    }
-  }
-
-  previousPage(): void {
-    if (!this.page?.first && !this.loading) {
-      --this.pageNumber;
-      this.loading = true;
-
-      let serviceCall: Observable<ApiResponse>;
-
-      if (this.filter) {
-        serviceCall = this.imageService.filterImages(this.pageNumber, this.filter);
-      } else if (!this.keyword) {
-        serviceCall = this.imageService.getAllImages(this.pageNumber);
-      } else {
-        serviceCall = this.imageService.searchImages(this.pageNumber, this.keyword);
-      }
-
-      serviceCall.subscribe(
-        (data: ApiResponse) => {
-          this.page = data;
-          this.images = data.content;
-          this.nextDisabled = false;
-          if (this.page.first) {
-            this.nextDisabled = false;
-            this.previousDisabled = true;
-          }
-          this.loading = false;
-
-          this.scrollToTop();
-        }
-      );
-    }
   }
 
   scrollToTop() {
@@ -121,7 +56,6 @@ export class ExploreComponent implements OnInit {
   }
 
   async filterImages(): Promise<void> {
-    this.loading = true;
     this.pageNumber = 0;
     let tagIds: number[] = [];
 
@@ -149,13 +83,11 @@ export class ExploreComponent implements OnInit {
     this.imageService.filterImages(this.pageNumber, this.filter).subscribe((data: ApiResponse) => {
       this.page = data;
       this.images = data.content;
-      this.loading = false;
+      this.totalElements = data.totalElements;
     });
   }
 
   getImages(): void {
-    this.loading = true;
-
     let serviceCall: Observable<ApiResponse>;
 
     if (!this.keyword) {
@@ -168,7 +100,29 @@ export class ExploreComponent implements OnInit {
       (data: ApiResponse) => {
         this.page = data;
         this.images = data.content;
-        this.loading = false;
+        this.totalElements = data.totalElements;
+      }
+    );
+  }
+
+  changePage(event: PageEvent) {
+    this.pageNumber = event.pageIndex;
+
+    let serviceCall: Observable<ApiResponse>;
+
+    if (this.filter) {
+      serviceCall = this.imageService.filterImages(this.pageNumber, this.filter);
+    } else if (!this.keyword) {
+      serviceCall = this.imageService.getAllImages(this.pageNumber);
+    } else {
+      serviceCall = this.imageService.searchImages(this.pageNumber, this.keyword);
+    }
+
+    serviceCall.subscribe(
+      (data: ApiResponse) => {
+        this.page = data;
+        this.images = data.content;
+        this.scrollToTop();
       }
     );
   }
