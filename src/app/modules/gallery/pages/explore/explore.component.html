@@ -1,35 +1,45 @@
-<div class="container mt-2">
-  <div class="row filtering-area">
-    <div class="col-12 col-lg-4">
-      <mat-form-field subscriptSizing="dynamic" class="w-100">
-        <mat-label>{{ 'filter_tag' | translate }}</mat-label>
-        <input [(ngModel)]="tagString" matInput type="text">
-      </mat-form-field>
+<div class="container mt-2 filter-container">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Filter
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-divider></mat-divider>
+    <div class="container">
+      <div class="row filtering-area">
+        <div class="col-12 col-lg-4">
+          <mat-form-field subscriptSizing="dynamic" class="w-100">
+            <mat-label>{{ 'filter_tag' | translate }}</mat-label>
+            <input [(ngModel)]="tagString" matInput type="text">
+          </mat-form-field>
+        </div>
+        <div class="col-12 col-lg-4 mt-2-sm">
+          <mat-form-field color="accent" subscriptSizing="dynamic" class="w-100">
+            <mat-label>{{ 'filter_date' | translate }}</mat-label>
+            <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+              <input formControlName="start" matStartDate placeholder="Start date">
+              <input formControlName="end" matEndDate placeholder="End date">
+            </mat-date-range-input>
+            <mat-datepicker-toggle [for]="picker" matIconSuffix></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+            @if (range.controls.start.hasError('')) {
+              <mat-error>{{ 'filter_wrong_start_date' | translate }}</mat-error>
+            }
+            @if (range.controls.end.hasError('matEndDateInvalid')) {
+              <mat-error>{{ 'filter_wrong_end_date' | translate }}</mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-12 col-lg-4 mt-2-sm text-lg-right text-center">
+          <button (click)="filterImages()" class="btn colored-button">{{ 'filter_button' | translate }}</button>
+        </div>
+      </div>
     </div>
-    <div class="col-12 col-lg-4 mt-2-sm">
-      <mat-form-field color="accent" subscriptSizing="dynamic" class="w-100">
-        <mat-label>{{ 'filter_date' | translate }}</mat-label>
-        <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
-          <input formControlName="start" matStartDate placeholder="Start date">
-          <input formControlName="end" matEndDate placeholder="End date">
-        </mat-date-range-input>
-        <mat-datepicker-toggle [for]="picker" matIconSuffix></mat-datepicker-toggle>
-        <mat-date-range-picker #picker></mat-date-range-picker>
-        @if (range.controls.start.hasError('')) {
-          <mat-error>{{ 'filter_wrong_start_date' | translate }}</mat-error>
-        }
-        @if (range.controls.end.hasError('matEndDateInvalid')) {
-          <mat-error>{{ 'filter_wrong_end_date' | translate }}</mat-error>
-        }
-      </mat-form-field>
-    </div>
-    <div class="col-12 col-lg-4 mt-2-sm text-lg-right text-center">
-      <button (click)="filterImages()" class="btn colored-button">{{ 'filter_button' | translate }}</button>
-    </div>
-  </div>
+  </mat-expansion-panel>
 </div>
 
-<div class="container mt-3">
+<div class="container" style="margin-top: 74px;">
   <div class="row justify-content-center">
     <div *ngFor="let image of images" class="image-container col-lg-3 col-md-6 col-8 mb-3">
       <img (click)="redirectToView(image.id)" [src]="'data:image/jpg;base64,' + image?.imageThumbnail" alt="Image"/>
@@ -37,4 +47,5 @@
   </div>
 </div>
 
-<mat-paginator class="paginator-container" [length]="totalElements" [pageIndex]="pageNumber" [pageSize]="8" (page)="changePage($event)"></mat-paginator>
+<mat-paginator class="paginator-container" [length]="totalElements" [pageIndex]="pageNumber" [pageSize]="8"
+               (page)="changePage($event)"></mat-paginator>

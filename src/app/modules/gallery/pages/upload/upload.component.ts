@@ -6,6 +6,7 @@ import {COMMA, ENTER, SPACE} from "@angular/cdk/keycodes";
 import {MatChipInputEvent} from "@angular/material/chips";
 import {FormControl, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-upload',
@@ -29,7 +30,9 @@ export class UploadComponent {
   readonly separatorKeysCodes = [ENTER, COMMA, SPACE] as const;
   selectedImage: File | undefined;
 
-  constructor(private galleryService: GalleryService, private router: Router) {
+  constructor(private galleryService: GalleryService,
+              private router: Router,
+              private snackBar: MatSnackBar) {
   }
 
   add(event: MatChipInputEvent): void {
@@ -72,8 +75,15 @@ export class UploadComponent {
 
     this.galleryService.uploadImage(this.image, this.selectedImage).subscribe(
       (response: string) => {
-        this.router.navigate(['/']).then().catch(err => {
+        this.router.navigate(['/gallery/explore']).then().catch(err => {
           alert(err)
+        });
+
+        this.snackBar.open("Image uploaded successfully!", "✅",  {
+          horizontalPosition: "center",
+          verticalPosition: "bottom",
+          duration: 500,
+          panelClass: 'on-top-snack-bar'
         });
     });
   }

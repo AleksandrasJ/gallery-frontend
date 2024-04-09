@@ -38,3 +38,7 @@
   overflow-y: auto; /* Enable vertical scrollbar */
   max-height: 40px; /* Adjust the maximum height as per your requirement */
 }
+
+.on-top-snack-bar {
+  z-index: 2;
+}

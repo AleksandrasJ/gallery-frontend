@@ -6,6 +6,7 @@ import {GalleryService} from "../../../../core/services/gallery.service";
 import {MatChipInputEvent} from "@angular/material/chips";
 import {TagModel} from "../../../../core/models/TagModel";
 import {ActivatedRoute, Router} from "@angular/router";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-edit',
@@ -35,7 +36,8 @@ export class EditComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
               private galleryService: GalleryService,
-              private router: Router) {
+              private router: Router,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -74,6 +76,11 @@ export class EditComponent implements OnInit {
       (response: string) => {
         this.router.navigate([`/gallery/view/${this.id}`]).then().catch(err => {
           alert(err)
+        });
+        this.snackBar.open("Image updated successfully!", "✅",  {
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom',
+          duration: 500
         });
       }
     );

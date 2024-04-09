@@ -3,10 +3,17 @@
   margin-right: auto; /* Align the container to the left */
   width: 100%;
   align-items: center;
-  background: white;
   padding: 8px;
-  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.2);
   border-radius: 1px;
+}
+
+.filter-container {
+  position: fixed;
+  top: 54px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  z-index: 1;
 }
 
 .colored-button {
@@ -62,5 +69,5 @@
   left: 0;
   width: 100%;
   background-color: #f8f8f0; /* Set the background color as per your design */
-  z-index: 9999; /* Ensure it's above other content */
+  z-index: 1;
 }
