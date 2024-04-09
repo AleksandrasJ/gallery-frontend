@@ -19,6 +19,7 @@
   "image_edit": "Edit image",
   "image_delete": "Delete image",
   "image_update": "Update image",
+  "filter": "Filter",
   "filter_tag": "Tags",
   "filter_date": "Date",
   "filter_wrong_start_date": "Invalid start date",
